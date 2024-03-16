@@ -1,6 +1,6 @@
-# # PDF CHATBOT
+# PDF CHATBOT
 
-This project lets the user upload their PDF file and chat with the content inside. Along with this they have the functionality to ask follow up questions.
+The AI PDF Reader is an innovative web application that empowers users to interact with the content of their PDF documents through a chat interface. With this tool, users can seamlessly upload their PDF files, engage in conversations based on the document content, and even ask follow-up questions for deeper insights. Dive into your PDFs like never before and unlock the potential of intelligent document interaction with the AI PDF Reader.
 
 ### A typical top-level directory layout
 
