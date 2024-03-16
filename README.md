@@ -1,19 +1,19 @@
-# # PDF CHATBOT
+# PDF CHATBOT
 
-This project lets the user upload their PDF file and chat with the content inside. Along with this they have the functionality to ask follow up questions.
+The AI PDF Reader is an innovative web application that empowers users to interact with the content of their PDF documents through a chat interface. With this tool, users can seamlessly upload their PDF files, engage in conversations based on the document content, and even ask follow-up questions for deeper insights. Dive into your PDFs like never before and unlock the potential of intelligent document interaction with the AI PDF Reader.
 
 ### A typical top-level directory layout
 
     ├── client                   # Frontend
-    ├── server                  # Backend
-    ├── README.md         # Readme file
+    ├── server                   # Backend
+    ├── README.md                # Readme file
 
 ###### Client
 
     ├── ...
     ├── src
     │        ├── assets                 # Svg files
-    │        ├── components         # Source files for UI Interface
+    │        ├── components             # Source files for UI Interface
     │        ├── App.js
     │        ├── index.js
     └── ...
@@ -22,7 +22,7 @@ This project lets the user upload their PDF file and chat with the content insid
 
      ├── ...
      ├── main.py                   # Main backend code
-     ├── requirements.txt       # Dependency file
+     ├── requirements.txt          # Dependency file
      └── ...
 
 # Installation
@@ -62,7 +62,7 @@ Clone the AI-PDF Reader repository to your local machine:
   npm run start
   ```
 
-####3. Navigate to the Server Directory
+#### 3. Navigate to the Server Directory
 
 - Go to server directory
   ```sh
@@ -78,7 +78,7 @@ Clone the AI-PDF Reader repository to your local machine:
   pip install -r requirements.txt
   ```
 
-####4. Create .env file in Server Directory
+#### 4. Create .env file in Server Directory
 Create a .env file in the server directory and add your OpenAI API key:
 
 - Add the following line to the .env file:
