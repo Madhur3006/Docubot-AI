@@ -1,40 +1,116 @@
 import SendImg from "../assets/svg/sendimg.svg";
 import userDp from "../assets/svg/user-dp.svg";
-import aiDp from "../assets/svg/ai-dp.svg";
+import aiDp from "../assets/svg/aiDp.svg";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
-const ChatSpace = () => {
+const ChatSpace = ({ uploadedFile }) => {
+  // State to manage user input question and chat history
+  const [question, setQuestion] = useState("");
+  const [chats, setChats] = useState([]);
+
+  // Function to handle Enter key press
+  const handleKeyUp = (e) => {
+    e.preventDefault();
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
+  // Function to handle question submission
+  const handleSubmit = async () => {
+    //Check if submit without question
+    if (question.length === 0) {
+      toast.error("Type some question");
+      return;
+    }
+
+    setChats((prevChats) => [
+      ...prevChats,
+      { sender: "user", message: question.trim() },
+    ]);
+    setQuestion("");
+
+    // Send user question to server and get AI response
+    const answerPromise = new Promise(async (resolve, reject) => {
+      const res = await fetch("http://localhost:8000/process", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ question }),
+      });
+      if (!res.ok) reject();
+      else {
+        resolve();
+        const data = await res.json();
+        setChats((prevChats) => [
+          ...prevChats,
+          { sender: "ai", message: data.result },
+        ]);
+      }
+    });
+
+    // Display toast notification for answer generation process
+    toast.promise(answerPromise, {
+      loading: "Generating Answer",
+      success: "Generated",
+      error: "Error",
+    });
+  };
+
   return (
     <section className="max-w-[1450px] w-full mx-auto h-[calc(100vh-77px)] pt-20 pb-10 relative max-2xl:px-[32px] flex flex-col justify-between">
-      <div className="w-full h-[75vh] overflow-y-scroll scrollbar-hidden flex flex-col max-xl:gap-10 gap-20">
-        <div className="flex items-start gap-6">
-          <img src={userDp} alt="" />
-          <div>explain like im 5</div>
+      {/* Render background when there are no chats */}
+      {chats.length === 0 && (
+        <div className="w-full h-[65vh] flex flex-col items-center justify-center text-[#E6E8EE] text-9xl font-bold">
+          Start Chat
+          <span className="text-[#E6E8EE] text-xl font-bold">
+            Upload PDF and Ask questions
+          </span>
         </div>
-        <div className="flex items-start gap-6">
-          <img src={aiDp} alt="" />
-          <div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste
-            perspiciatis earum dicta suscipit. Laboriosam eaque a repellat
-            ducimus quod provident saepe, ipsa odit voluptas voluptatem maxime
-            earum. Suscipit, accusantium! Fugit vitae velit, fuga rem aperiam
-            modi consequuntur consequatur provident nam eius facilis saepe qui
-            atque minus ipsa amet voluptatum? Ullam consequuntur suscipit
-            officiis blanditiis necessitatibus est illo tempore facere
-            repellendus numquam aperiam veniam sit natus laborum, voluptate
-            neque repudiandae, earum dolorem incidunt modi cum. Repellat nam
-            aliquam autem, repudiandae ad quo incidunt non laboriosam eaque ut
-            eveniet reiciendis, possimus quidem natus laborum accusantium
-            laudantium porro doloribus animi tempore soluta officiis?
-          </div>
+      )}
+
+      {/* Render chat history */}
+      {chats.length > 0 && (
+        <div className="w-full h-[75vh] overflow-y-scroll scrollbar-hidden flex flex-col max-xl:gap-10 gap-20">
+          {/* Chat structure */}
+          {chats.map((chat, index) => (
+            <div key={index} className="flex items-start gap-6">
+              <img src={chat.sender === "user" ? userDp : aiDp} alt="Dp" />
+              <div>{chat.message}</div>
+            </div>
+          ))}
         </div>
-      </div>
-      <div className="w-full z-[100] px-10 bottom-10 flex items-center justify-between border-2 border-[#E4E8EE] shadow-drop-input rounded-md">
+      )}
+
+      {/* Input field for asking questions */}
+      <div
+        className={`w-full z-[100] px-10 bottom-10 flex items-center justify-between border-2 border-[#E4E8EE] shadow-drop-input rounded-md ${
+          !uploadedFile ? "cursor-not-allowed bg-[rgba(231,231,231,1)]" : ""
+        }`}
+      >
         <input
           type="text"
-          className="w-[95%] max-xl:py-2 py-3 outline-none"
-          placeholder="Send a message..."
+          className={`w-[95%] max-xl:py-2 py-3 outline-none bg-transparent ${
+            !uploadedFile ? "cursor-not-allowed" : ""
+          }`}
+          placeholder="Ask questions here ..."
+          value={question}
+          disabled={uploadedFile ? false : true}
+          onChange={(e) => setQuestion(e.target.value)}
+          onKeyUp={(e) => handleKeyUp(e)}
         />
-        <img src={SendImg} alt="send" className="cursor-pointer" />
+
+        {/* Send Icon */}
+        <img
+          src={SendImg}
+          alt="send"
+          className={`${
+            !uploadedFile ? "cursor-not-allowed" : "cursor-pointer"
+          }`}
+          onClick={handleSubmit}
+        />
       </div>
     </section>
   );
