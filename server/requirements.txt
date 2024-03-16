@@ -2,14 +2,6 @@ faiss-cpu==1.8.0
 fastapi==0.110.0
 langchain==0.1.12
 langchain-community==0.0.28
-langchain-core==0.1.31
-langchain-openai==0.0.8
-langchain-text-splitters==0.0.1
-langsmith==0.1.25
-openai==1.14.0
-pydantic==2.6.4
-pydantic_core==2.16.3
-tiktoken==0.6.0
 PyPDF2==3.0.1
 python-dotenv==1.0.1
 uvicorn==0.28.0
