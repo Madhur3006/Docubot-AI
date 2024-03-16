@@ -87,7 +87,7 @@ async def process_question(question_data: Question):
         # Search for similar documents in vector store
         docs = vector_store.similarity_search(question)
 
-        
+        # Custom template
         template = """You are a chatbot having a conversation with a human.
 
         Given the following extracted parts of a long document and a question, create a final answer.
