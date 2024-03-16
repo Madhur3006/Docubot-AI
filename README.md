@@ -5,15 +5,15 @@ This project lets the user upload their PDF file and chat with the content insid
 ### A typical top-level directory layout
 
     ├── client                   # Frontend
-    ├── server                  # Backend
-    ├── README.md         # Readme file
+    ├── server                   # Backend
+    ├── README.md                # Readme file
 
 ###### Client
 
     ├── ...
     ├── src
     │        ├── assets                 # Svg files
-    │        ├── components         # Source files for UI Interface
+    │        ├── components             # Source files for UI Interface
     │        ├── App.js
     │        ├── index.js
     └── ...
@@ -22,7 +22,7 @@ This project lets the user upload their PDF file and chat with the content insid
 
      ├── ...
      ├── main.py                   # Main backend code
-     ├── requirements.txt       # Dependency file
+     ├── requirements.txt          # Dependency file
      └── ...
 
 # Installation
@@ -62,7 +62,7 @@ Clone the AI-PDF Reader repository to your local machine:
   npm run start
   ```
 
-####3. Navigate to the Server Directory
+#### 3. Navigate to the Server Directory
 
 - Go to server directory
   ```sh
@@ -78,7 +78,7 @@ Clone the AI-PDF Reader repository to your local machine:
   pip install -r requirements.txt
   ```
 
-####4. Create .env file in Server Directory
+#### 4. Create .env file in Server Directory
 Create a .env file in the server directory and add your OpenAI API key:
 
 - Add the following line to the .env file:
