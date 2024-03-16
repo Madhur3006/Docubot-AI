@@ -1,13 +1,22 @@
 import SendImg from "../assets/svg/sendimg.svg";
 import userDp from "../assets/svg/user-dp.svg";
 import aiDp from "../assets/svg/aiDp.svg";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 const ChatSpace = ({ uploadedFile }) => {
   // State to manage user input question and chat history
   const [question, setQuestion] = useState("");
   const [chats, setChats] = useState([]);
+  const chatContainerRef = useRef(null);
+
+  useEffect(() => {
+    // Scroll chat container to bottom whenever chats change
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight - 500;
+    }
+  }, [chats]);
 
   // Function to handle Enter key press
   const handleKeyUp = (e) => {
@@ -73,7 +82,10 @@ const ChatSpace = ({ uploadedFile }) => {
 
       {/* Render chat history */}
       {chats.length > 0 && (
-        <div className="w-full h-[75vh] overflow-y-scroll scrollbar-hidden flex flex-col max-xl:gap-10 gap-20">
+        <div
+          ref={chatContainerRef}
+          className="w-full h-[72vh] overflow-y-scroll scrollbar-hidden flex flex-col max-xl:gap-10 gap-20"
+        >
           {/* Chat structure */}
           {chats.map((chat, index) => (
             <div key={index} className="flex items-start gap-6">
