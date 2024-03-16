@@ -20,6 +20,7 @@ app = FastAPI()
 # Define allowed origins for CORS
 origins = [
     "http://localhost:3000",
+    "https://pdf-chat-puce.vercel.app"
 ]
 
 # Configure CORS middleware
