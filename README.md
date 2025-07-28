@@ -2,10 +2,6 @@
 
 The AI PDF Reader is an innovative web application that empowers users to interact with the content of their PDF documents through a chat interface. With this tool, users can seamlessly upload their PDF files, engage in conversations based on the document content, and even ask follow-up questions for deeper insights. Dive into your PDFs like never before and unlock the potential of intelligent document interaction with the AI PDF Reader.
 
-# Images
-
-![Mobile View](https://github.com/parthy007/aipdfreader/assets/108089718/14be52fc-ed8a-4a2e-b65a-647d87fa4211)
-![Desktop View](https://github.com/parthy007/aipdfreader/assets/108089718/33b653bb-74af-4b91-9e2f-323c946d33a3)
 
 ### A typical top-level directory layout
 
